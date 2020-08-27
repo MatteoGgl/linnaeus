@@ -1,0 +1,43 @@
+{
+  "name": "matteoggl/linnaeus",
+  "description": "A package to create readable, random slugs for Eloquent models from animal names and adjectives.",
+  "keywords": [
+    "laravel",
+    "eloquent",
+    "slug"
+  ],
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Matteo Guglielmetti",
+      "email": "matteo.guglielmetti@hotmail.it"
+    }
+  ],
+  "require": {
+    "php": ">=7.4"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.3",
+    "orchestra/testbench": "^4.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "MatteoGgl\\Linnaeus\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "MatteoGgl\\Linnaeus\\Tests\\": "tests/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "MatteoGgl\\Linnaeus\\LinnaeusServiceProvider"
+      ]
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
