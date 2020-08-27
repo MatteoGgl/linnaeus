@@ -1,5 +1,8 @@
 # Linnaeus
 
+![GitHub](https://img.shields.io/github/license/matteoggl/linnaeus)
+![Packagist Downloads](https://img.shields.io/packagist/dm/matteoggl/linnaeus)
+
 A package to create readable, random slugs for Eloquent models from animal names and adjectives.
 
 ## Installation
@@ -7,7 +10,7 @@ A package to create readable, random slugs for Eloquent models from animal names
 Just require the package through composer:
 
 ``` bash
-composer require matteoggl/linneus
+composer require matteoggl/linnaeus
 ```
 
 ## Usage
