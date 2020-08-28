@@ -11,7 +11,7 @@ class LinnaeusOptions
     public string $separator;
     public bool $create;
     public bool $update;
-    public array $lists;
+    protected array $lists = [];
     public array $invalid_animals;
     public array $invalid_adjectives;
     public array $invalid_colors;
@@ -31,8 +31,6 @@ class LinnaeusOptions
         $this->invalid_animals = config('linnaeus.invalid_animals', []);
         $this->invalid_adjectives = config('linnaeus.invalid_adjectives', []);
         $this->invalid_colors = config('linnaeus.invalid_colors', []);
-
-        $this->updateLists();
     }
 
     public static function create(): self
@@ -81,6 +79,25 @@ class LinnaeusOptions
     {
         $this->invalid_colors = $invalid;
         return $this;
+    }
+
+    public function getLists(): array
+    {
+        if (empty($this->lists)) {
+            $this->updateLists();
+        }
+
+        return $this->lists;
+    }
+
+    public function getRawLists(): array
+    {
+        return $this->lists;
+    }
+
+    public function getList(string $list_name): array
+    {
+        return $this->getLists()[$list_name];
     }
 
     private function updateLists()

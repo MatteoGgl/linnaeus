@@ -58,7 +58,7 @@ trait HasSlug
     {
         $slug = '';
 
-        $lists = $this->getLinnaeusOptions()->lists;
+        $lists = $this->getLinnaeusOptions()->getLists();
 
         foreach ($this->getLinnaeusOptions()->structure as $slug_part) {
             switch ($slug_part) {

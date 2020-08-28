@@ -20,9 +20,9 @@ class LinnaeusOptionsTest extends TestCase
         $this->assertEquals('-', $data->separator);
         $this->assertTrue($data->create);
         $this->assertFalse($data->update);
-        $this->assertNotEmpty($data->lists);
-        $this->assertCount(2, $data->lists);
-        foreach ($data->lists as $list) {
+        $this->assertNotEmpty($data->getLists());
+        $this->assertCount(2, $data->getLists());
+        foreach ($data->getLists() as $list) {
             $this->assertNotEmpty($list);
         }
         $this->assertEmpty($data->invalid_animals);
@@ -42,9 +42,9 @@ class LinnaeusOptionsTest extends TestCase
         $this->assertEquals('-', $data->separator);
         $this->assertTrue($data->create);
         $this->assertFalse($data->update);
-        $this->assertNotEmpty($data->lists);
-        $this->assertCount(2, $data->lists);
-        foreach ($data->lists as $list) {
+        $this->assertNotEmpty($data->getLists());
+        $this->assertCount(2, $data->getLists());
+        foreach ($data->getLists() as $list) {
             $this->assertNotEmpty($list);
         }
         $this->assertEmpty($data->invalid_animals);
@@ -125,10 +125,10 @@ class LinnaeusOptionsTest extends TestCase
     public function it_updates_the_lists()
     {
         $data = LinnaeusOptions::create();
-        $this->assertCount(2, $data->lists);
+        $this->assertCount(2, $data->getLists());
 
         $data->withStructure(['color', 'adjective', 'adjective', 'animal']);
-        $this->assertCount(3, $data->lists);
+        $this->assertCount(3, $data->getLists());
     }
 
     /** @test */
@@ -141,8 +141,8 @@ class LinnaeusOptionsTest extends TestCase
         $data = LinnaeusOptions::create()
             ->withStructure(['animal']);
 
-        $this->assertCount(1, $data->lists['animals']);
-        $this->assertEquals(['aardvark' => 'Aardvark'], $data->lists['animals']);
+        $this->assertCount(1, $data->getList('animals'));
+        $this->assertEquals(['aardvark' => 'Aardvark'], $data->getList('animals'));
     }
 
     /** @test */
@@ -155,8 +155,8 @@ class LinnaeusOptionsTest extends TestCase
         $data = LinnaeusOptions::create()
             ->withStructure(['adjective']);
 
-        $this->assertCount(1, $data->lists['adjectives']);
-        $this->assertEquals(['zany' => 'Zany'], $data->lists['adjectives']);
+        $this->assertCount(1, $data->getList('adjectives'));
+        $this->assertEquals(['zany' => 'Zany'], $data->getList('adjectives'));
     }
 
     /** @test */
@@ -169,7 +169,20 @@ class LinnaeusOptionsTest extends TestCase
         $data = LinnaeusOptions::create()
             ->withStructure(['color']);
 
-        $this->assertCount(1, $data->lists['colors']);
-        $this->assertEquals(['blue' => 'Blue'], $data->lists['colors']);
+        $this->assertCount(1, $data->getList('colors'));
+        $this->assertEquals(['blue' => 'Blue'], $data->getList('colors'));
+    }
+
+    /** @test */
+    public function it_lazy_loads_the_lists()
+    {
+        $data = LinnaeusOptions::create();
+
+        $this->assertEmpty($data->getRawLists());
+
+        $data->getList('animals');
+
+        $this->assertNotEmpty($data->getRawLists());
+        $this->assertCount(2, $data->getRawLists());
     }
 }
