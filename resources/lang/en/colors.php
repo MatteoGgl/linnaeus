@@ -123,7 +123,6 @@ return [
     'violet' => 'Violet',
     'viridian' => 'Viridian',
     'white' => 'White',
-    'wine' => 'Wine',
     'wisteria' => 'Wisteria',
     'xanthic' => 'Xanthic',
     'yellow' => 'Yellow',

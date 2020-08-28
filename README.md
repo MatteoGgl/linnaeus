@@ -10,7 +10,7 @@ A package to create readable, random slugs for Eloquent models from animal names
 Just require the package through composer:
 
 ``` bash
-composer require matteoggl/linnaeus^1.0.1
+composer require matteoggl/linnaeus
 ```
 
 ## Usage
